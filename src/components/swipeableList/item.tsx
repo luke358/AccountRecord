@@ -1,3 +1,4 @@
+import useLatest from '@/hooks/useLatest';
 import React from 'react';
 import {
   Animated,
@@ -5,6 +6,7 @@ import {
   PanResponder,
   PanResponderGestureState,
   StyleSheet,
+  Vibration,
   View,
 } from 'react-native';
 import {Text} from 'react-native-paper';
@@ -30,9 +32,11 @@ export default function Item(props: ItemProps) {
   );
 
   const [leftContent, setLeftContent] = React.useState({
-    text: '删除',
+    text: '取消',
     bgColor: '#999',
   });
+
+  const latestLeftContent = useLatest(leftContent);
 
   const scrollStopped = React.useRef(false);
 
@@ -96,10 +100,17 @@ export default function Item(props: ItemProps) {
         // position.setValue({x, y: 0});
         // }
         if (gesture.dx > FORCE_TO_OPEN_THRESHOLD) {
+          latestLeftContent.current.text !== '复制' && Vibration.vibrate(1);
           setLeftContent({text: '复制', bgColor: '#e35d88'});
         } else if (gesture.dx > LEFT_BUTTONS_THRESHOLD) {
-          setLeftContent({text: '编辑', bgColor: '#47ab94'});
+          latestLeftContent.current.text !== '编辑' &&
+            latestLeftContent.current.text !== '复制' &&
+            Vibration.vibrate(1);
+          setLeftContent(() => ({text: '编辑', bgColor: '#47ab94'}));
         } else {
+          latestLeftContent.current.text !== '取消' &&
+            latestLeftContent.current.text !== '编辑' &&
+            Vibration.vibrate(1);
           setLeftContent({text: '取消', bgColor: '#999'});
         }
       },
