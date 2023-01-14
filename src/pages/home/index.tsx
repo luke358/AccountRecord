@@ -1,3 +1,4 @@
+import SwipeableList from '@/components/swipeableList';
 import rpx from '@/utils/rpx';
 import React from 'react';
 import {
@@ -200,9 +201,7 @@ const App = () => {
             </View>
           </View>
           {/* 当前日期 收支明细 */}
-          <View>
-            <Text>111</Text>
-          </View>
+          <SwipeableList data={[{id: 1}, {id: 2}]} />
         </View>
       </ScrollView>
     </SafeAreaView>
