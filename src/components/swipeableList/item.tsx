@@ -13,7 +13,7 @@ import {Text} from 'react-native-paper';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCROLL_THRESHOLD = SCREEN_WIDTH / 15;
-const FORCE_TO_OPEN_THRESHOLD = SCREEN_WIDTH / 2.2;
+const FORCE_TO_OPEN_THRESHOLD = SCREEN_WIDTH / 2.1;
 const LEFT_BUTTONS_THRESHOLD = SCREEN_WIDTH / 3.1;
 
 interface ItemProps {
