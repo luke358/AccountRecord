@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f6f6f6',
   },
   view: {
-    paddingHorizontal: rpx(20),
+    paddingHorizontal: rpx(30),
     paddingTop: rpx(20),
     // backgroundColor: 'white',
   },
