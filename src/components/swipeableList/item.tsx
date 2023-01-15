@@ -10,7 +10,7 @@ import {
   Vibration,
   View,
 } from 'react-native';
-import {Text, TouchableRipple} from 'react-native-paper';
+import {RadioButton, Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -20,12 +20,14 @@ const LEFT_BUTTONS_THRESHOLD = SCREEN_WIDTH / 4;
 
 interface ItemProps {
   swipingCheck: (swiping: boolean) => void;
+  isEdit?: boolean;
   message?: string;
   id: any;
   cleanFromScreen: (id: any) => void;
   leftButtonPressed: (type: 'copy' | 'edit') => void;
   deleteButtonPressed: () => void;
   editButtonPressed: () => void;
+  onStartEdit?: (isDone: boolean) => void;
 }
 
 export default function Item(props: ItemProps) {
@@ -164,6 +166,7 @@ export default function Item(props: ItemProps) {
             setTimeout(() => {
               if (!scrollStopped.current) {
                 console.log('开启选择模式');
+                props.onStartEdit && props.onStartEdit(true);
               }
             }, 1000);
           }}>
@@ -175,7 +178,8 @@ export default function Item(props: ItemProps) {
               height: rpx(115),
               justifyContent: 'space-between',
               paddingVertical: rpx(15),
-              paddingHorizontal: rpx(25),
+              paddingRight: rpx(25),
+              paddingLeft: rpx(15),
             }}>
             <View
               style={{
@@ -183,12 +187,26 @@ export default function Item(props: ItemProps) {
                 alignItems: 'center',
                 flexDirection: 'row',
               }}>
-              <Icon name="cellphone" size={rpx(55)} />
+              <View style={{width: rpx(80)}}>
+                {props?.isEdit ? (
+                  <RadioButton
+                    value="first"
+                    status="checked"
+                    color="#47ab94"
+                    // onPress={() => setChecked('first')}
+                  />
+                ) : (
+                  <Icon
+                    style={{marginLeft: rpx(10), paddingVertical: rpx(12)}}
+                    name="cellphone"
+                    size={rpx(55)}
+                  />
+                )}
+              </View>
               <View
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                  marginLeft: rpx(15),
                 }}>
                 <View style={{display: 'flex', flexDirection: 'row'}}>
                   <Text>购物消费</Text>
