@@ -10,7 +10,7 @@ import {
   Vibration,
   View,
 } from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -54,6 +54,7 @@ export default function Item(props: ItemProps) {
       text: '取消',
       bgColor: '#999',
     });
+    enableScrollView(false);
     Animated.timing(positionRef.current, {
       toValue: {x: 0, y: 0},
       duration: 200,
@@ -147,8 +148,8 @@ export default function Item(props: ItemProps) {
           {backgroundColor: leftContent.bgColor},
           getLeftButtonProps(),
         ]}>
-        <View style={{height: rpx(80)}}>
-          <Text style={{color: 'white', lineHeight: rpx(80)}}>
+        <View style={{height: rpx(90)}}>
+          <Text style={{color: 'white', lineHeight: rpx(90)}}>
             {leftContent.text}
           </Text>
         </View>
@@ -156,39 +157,52 @@ export default function Item(props: ItemProps) {
       <Animated.View
         {...panResponder.current.panHandlers}
         style={[textContainer, positionRef.current.getLayout()]}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            height: rpx(80),
-            justifyContent: 'space-between',
+        <TouchableRipple
+          onPress={() => {}}
+          onTouchStart={() => {
+            console.log('start');
+            setTimeout(() => {
+              if (!scrollStopped.current) {
+                console.log('开启选择模式');
+              }
+            }, 1000);
           }}>
           <View
             style={{
               display: 'flex',
-              alignItems: 'center',
               flexDirection: 'row',
+              alignItems: 'center',
+              height: rpx(115),
+              justifyContent: 'space-between',
+              paddingVertical: rpx(15),
+              paddingHorizontal: rpx(25),
             }}>
-            <Icon name="cellphone" size={rpx(55)} />
             <View
               style={{
                 display: 'flex',
-                justifyContent: 'center',
-                marginLeft: rpx(15),
+                alignItems: 'center',
+                flexDirection: 'row',
               }}>
-              <View style={{display: 'flex', flexDirection: 'row'}}>
-                <Text>购物消费</Text>
-                <Text>-</Text>
-                <Text>零食</Text>
+              <Icon name="cellphone" size={rpx(55)} />
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginLeft: rpx(15),
+                }}>
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                  <Text>购物消费</Text>
+                  <Text>-</Text>
+                  <Text>零食</Text>
+                </View>
+                <Text variant="bodySmall" style={{color: '9c9c9c'}}>
+                  备注
+                </Text>
               </View>
-              <Text variant="bodySmall" style={{color: '9c9c9c'}}>
-                备注
-              </Text>
             </View>
+            <Text style={{color: '#47ab94'}}>+100.00</Text>
           </View>
-          <Text style={{color: '#47ab94'}}>+100.00</Text>
-        </View>
+        </TouchableRipple>
       </Animated.View>
       {/* <Animated.View style={[rightButtonContainer, this.getRightButtonProps()]} /> */}
     </View>
@@ -202,8 +216,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    paddingVertical: rpx(15),
-    paddingHorizontal: rpx(25),
     backgroundColor: '#fff',
   },
   rightButtonContainer: {
