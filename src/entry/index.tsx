@@ -11,8 +11,8 @@ import {StatusBar} from 'react-native';
 // const Stack = createNativeStackNavigator<any>();
 
 const App = () => {
-  StatusBar.setBackgroundColor('transparent');
-
+  StatusBar.setBackgroundColor('#f6f6f6');
+  StatusBar.setBarStyle('dark-content');
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <PaperProvider>

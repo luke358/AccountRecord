@@ -1,4 +1,5 @@
 import useLatest from '@/hooks/useLatest';
+import rpx from '@/utils/rpx';
 import React from 'react';
 import {
   Animated,
@@ -10,11 +11,12 @@ import {
   View,
 } from 'react-native';
 import {Text} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCROLL_THRESHOLD = SCREEN_WIDTH / 15;
 const FORCE_TO_OPEN_THRESHOLD = SCREEN_WIDTH / 2.1;
-const LEFT_BUTTONS_THRESHOLD = SCREEN_WIDTH / 3.1;
+const LEFT_BUTTONS_THRESHOLD = SCREEN_WIDTH / 4;
 
 interface ItemProps {
   swipingCheck: (swiping: boolean) => void;
@@ -48,6 +50,10 @@ export default function Item(props: ItemProps) {
   };
 
   const resetPosition = () => {
+    setLeftContent({
+      text: '取消',
+      bgColor: '#999',
+    });
     Animated.timing(positionRef.current, {
       toValue: {x: 0, y: 0},
       duration: 200,
@@ -141,14 +147,49 @@ export default function Item(props: ItemProps) {
           {backgroundColor: leftContent.bgColor},
           getLeftButtonProps(),
         ]}>
-        <View>
-          <Text style={{color: 'white'}}>{leftContent.text}</Text>
+        <View style={{height: rpx(80)}}>
+          <Text style={{color: 'white', lineHeight: rpx(80)}}>
+            {leftContent.text}
+          </Text>
         </View>
       </Animated.View>
       <Animated.View
         {...panResponder.current.panHandlers}
-        style={[textContainer, positionRef.current.getLayout()]}
-      />
+        style={[textContainer, positionRef.current.getLayout()]}>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: rpx(80),
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <Icon name="cellphone" size={rpx(55)} />
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginLeft: rpx(15),
+              }}>
+              <View style={{display: 'flex', flexDirection: 'row'}}>
+                <Text>购物消费</Text>
+                <Text>-</Text>
+                <Text>零食</Text>
+              </View>
+              <Text variant="bodySmall" style={{color: '9c9c9c'}}>
+                备注
+              </Text>
+            </View>
+          </View>
+          <Text style={{color: '#47ab94'}}>+100.00</Text>
+        </View>
+      </Animated.View>
       {/* <Animated.View style={[rightButtonContainer, this.getRightButtonProps()]} /> */}
     </View>
   );
@@ -158,19 +199,12 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    marginBottom: 5,
-    marginHorizontal: 5,
-    marginTop: 30,
-    elevation: 3,
   },
   textContainer: {
-    width: SCREEN_WIDTH / 1.03,
-    paddingHorizontal: 30,
-    paddingVertical: 35,
-    borderRadius: 7,
-    backgroundColor: '#CFD8DC',
-    elevation: 3,
-    zIndex: 2,
+    width: '100%',
+    paddingVertical: rpx(15),
+    paddingHorizontal: rpx(25),
+    backgroundColor: '#fff',
   },
   rightButtonContainer: {
     position: 'absolute',
@@ -186,12 +220,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   leftButtonContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 5,
-    paddingVertical: 25,
+    alignItems: 'flex-end',
+    paddingRight: rpx(30),
+    paddingVertical: rpx(15),
     flex: 1,
     position: 'absolute',
-    elevation: 3,
   },
 });

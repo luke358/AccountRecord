@@ -1,10 +1,9 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor="transparent" />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
           <Text>tttttttt-mine</Text>

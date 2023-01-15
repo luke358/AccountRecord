@@ -28,7 +28,7 @@ const App = () => {
   };
   return (
     <SafeAreaView style={styles.appWrapper}>
-      <Appbar.Header>
+      <Appbar.Header style={{backgroundColor: '#f6f6f6'}}>
         <Appbar.Action
           onPress={openMenu}
           ref={bookRef}
@@ -182,21 +182,28 @@ const App = () => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
+              marginBottom: rpx(10),
+              marginTop: rpx(30),
             }}>
             <View style={{display: 'flex', flexDirection: 'row'}}>
-              <Text style={{fontWeight: 'bold', marginRight: rpx(15)}}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  marginRight: rpx(20),
+                  fontSize: rpx(26),
+                }}>
                 今天
               </Text>
-              <Text style={{color: '#9c9c9c'}}>周五</Text>
+              <Text style={{color: '#9c9c9c', fontSize: rpx(26)}}>周五</Text>
             </View>
             <View style={{display: 'flex', flexDirection: 'row'}}>
               <Text style={{marginRight: rpx(15)}}>
-                <Text style={{color: '#9c9c9c'}}>收:</Text>{' '}
-                <Text style={{color: '#47ab94'}}>0.00</Text>
+                <Text style={{color: '#9c9c9c', fontSize: rpx(26)}}>收:</Text>
+                <Text style={{color: '#47ab94', fontSize: rpx(26)}}>0.00</Text>
               </Text>
               <Text>
-                <Text style={{color: '#9c9c9c'}}>支: </Text>
-                <Text style={{color: '#f65859'}}>50.00</Text>
+                <Text style={{color: '#9c9c9c', fontSize: rpx(26)}}>支: </Text>
+                <Text style={{color: '#f65859', fontSize: rpx(26)}}>50.00</Text>
               </Text>
             </View>
           </View>
@@ -212,11 +219,12 @@ const styles = StyleSheet.create({
   appWrapper: {
     flexDirection: 'column',
     height: '100%',
+    backgroundColor: '#f6f6f6',
   },
   view: {
     paddingHorizontal: rpx(20),
     paddingTop: rpx(20),
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
 });
 export default App;

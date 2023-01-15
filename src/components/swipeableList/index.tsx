@@ -1,3 +1,4 @@
+import rpx from '@/utils/rpx';
 import React from 'react';
 import {ScrollView} from 'react-native';
 import Item from './item';
@@ -26,5 +27,11 @@ export default function SwipeableList(props: SwipeableListProps) {
       );
     });
   };
-  return <ScrollView scrollEnabled={!swiping}>{renderItems()}</ScrollView>;
+  return (
+    <ScrollView
+      style={{borderRadius: rpx(20), overflow: 'hidden'}}
+      scrollEnabled={!swiping}>
+      {renderItems()}
+    </ScrollView>
+  );
 }
