@@ -43,6 +43,7 @@ export default function Item(props: ItemProps) {
   const latestLeftContent = useLatest(leftContent);
 
   const scrollStopped = React.useRef(false);
+  const timer = React.useRef<number>(0);
 
   const enableScrollView = (isEnabled: boolean) => {
     if (scrollStopped.current !== isEnabled) {
@@ -163,12 +164,15 @@ export default function Item(props: ItemProps) {
           onPress={() => {}}
           onTouchStart={() => {
             console.log('start');
-            setTimeout(() => {
+            timer.current = setTimeout(() => {
               if (!scrollStopped.current) {
                 console.log('开启选择模式');
                 props.onStartEdit && props.onStartEdit(true);
               }
-            }, 1000);
+            }, 600);
+          }}
+          onTouchEnd={() => {
+            clearTimeout(timer.current);
           }}>
           <View
             style={{
