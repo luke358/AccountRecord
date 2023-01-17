@@ -19,6 +19,7 @@ export default function TabBar() {
         tabBarIndicatorStyle: {
           height: 0,
         },
+        animationEnabled: false,
         tabBarBounces: false,
         tabBarPressColor: '#ccc',
       }}
