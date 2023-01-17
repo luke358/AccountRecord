@@ -1,14 +1,17 @@
 import React from 'react';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
-// import {routes} from './router';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import TabBar from '@/components/tabBar';
 import {StatusBar} from 'react-native';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
+import {routes} from './router';
 
-// const Stack = createNativeStackNavigator<any>();
+const Stack = createStackNavigator<any>();
 
 const App = () => {
   StatusBar.setBackgroundColor('#f6f6f6');
@@ -18,15 +21,12 @@ const App = () => {
       <PaperProvider>
         <SafeAreaProvider>
           <NavigationContainer>
-            {/* <Stack.Navigator
-              initialRouteName={routes[0].path}
+            <Stack.Navigator
               screenOptions={{
-                statusBarColor: 'transparent',
-                statusBarTranslucent: false,
                 headerShown: false,
-                animation: 'slide_from_right',
-                animationDuration: 200,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}>
+              <Stack.Screen name={'dashboard'} component={TabBar} />
               {routes.map(route => (
                 <Stack.Screen
                   key={route.path}
@@ -34,8 +34,7 @@ const App = () => {
                   component={route.component}
                 />
               ))}
-            </Stack.Navigator> */}
-            <TabBar />
+            </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
       </PaperProvider>

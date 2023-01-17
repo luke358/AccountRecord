@@ -4,6 +4,7 @@ import Home from '../pages/home';
 import Info from '../pages/info';
 import Chart from '../pages/chart';
 import Mine from '../pages/mine';
+import AddRecord from '../pages/addRecord';
 import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs([
@@ -17,6 +18,7 @@ export const ROUTE_PATH = {
   INFO: 'info',
   CHART: 'chart',
   MINE: 'mine',
+  ADDRECORD: 'addRecord',
 } as const;
 
 type Valueof<T> = T[keyof T];
@@ -29,20 +31,8 @@ type IRoutes = {
 
 export const routes: Array<IRoutes> = [
   {
-    path: ROUTE_PATH.HOME,
-    component: Home,
-  },
-  {
-    path: ROUTE_PATH.INFO,
-    component: Info,
-  },
-  {
-    path: ROUTE_PATH.CHART,
-    component: Chart,
-  },
-  {
-    path: ROUTE_PATH.MINE,
-    component: Mine,
+    path: ROUTE_PATH.ADDRECORD,
+    component: AddRecord,
   },
 ];
 export const tabs: Array<IRoutes> = [
