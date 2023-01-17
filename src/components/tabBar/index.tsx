@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import rpx from '@/utils/rpx';
 
 import Home from '@/pages/home';
 import Mine from '@/pages/mine';
@@ -7,22 +8,33 @@ import Info from '@/pages/info';
 import Chart from '@/pages/chart';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 export default function TabBar() {
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: '#47ab94',
-        headerShown: false,
         tabBarShowLabel: false,
-      }}>
+        tabBarIndicatorStyle: {
+          height: 0,
+        },
+        tabBarBounces: false,
+        tabBarPressColor: '#ccc',
+      }}
+      backBehavior="firstRoute"
+      initialRouteName="home"
+      tabBarPosition="bottom">
       <Tab.Screen
         name="home"
         component={Home}
         options={{
-          tabBarIcon: ({size, color}) => {
-            return <Icon name="home-plus-outline" color={color} size={size} />;
+          tabBarIcon: ({color, focused}) => {
+            return focused ? (
+              <Icon name="home-plus-outline" color={color} size={rpx(50)} />
+            ) : (
+              <Icon name="home-plus-outline" color={'#999'} size={rpx(50)} />
+            );
           },
         }}
       />
@@ -30,9 +42,19 @@ export default function TabBar() {
         name="info"
         component={Info}
         options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <Icon name="calendar-month-outline" color={color} size={size} />
+          tabBarIcon: ({color, focused}) => {
+            return focused ? (
+              <Icon
+                name="calendar-month-outline"
+                color={color}
+                size={rpx(50)}
+              />
+            ) : (
+              <Icon
+                name="calendar-month-outline"
+                color={'#999'}
+                size={rpx(50)}
+              />
             );
           },
         }}
@@ -41,8 +63,12 @@ export default function TabBar() {
         name="chart"
         component={Chart}
         options={{
-          tabBarIcon: ({size, color}) => {
-            return <Icon name="circle-slice-3" color={color} size={size} />;
+          tabBarIcon: ({color, focused}) => {
+            return focused ? (
+              <Icon name="circle-slice-3" color={color} size={rpx(50)} />
+            ) : (
+              <Icon name="circle-slice-3" color={'#999'} size={rpx(50)} />
+            );
           },
         }}
       />
@@ -50,12 +76,18 @@ export default function TabBar() {
         name="mine"
         component={Mine}
         options={{
-          tabBarIcon: ({size, color}) => {
-            return (
+          tabBarIcon: ({color, focused}) => {
+            return focused ? (
               <Icon
                 name="dots-horizontal-circle-outline"
                 color={color}
-                size={size}
+                size={rpx(50)}
+              />
+            ) : (
+              <Icon
+                name="dots-horizontal-circle-outline"
+                color={'#999'}
+                size={rpx(50)}
               />
             );
           },
