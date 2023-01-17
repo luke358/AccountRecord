@@ -4,18 +4,20 @@ import Item from './item';
 
 interface SwipeableListProps {
   data: any[];
+  edit?: boolean;
+  onEdit?: (isEdit: boolean) => void;
 }
 export default function SwipeableList(props: SwipeableListProps) {
-  const {data} = props;
+  const {data, edit = false, onEdit} = props;
   const [swiping, setSwiping] = React.useState<boolean>(false);
-  const [edit, setEdit] = React.useState<boolean>(false);
+  // const [edit, setEdit] = React.useState<boolean>(false);
 
   const cleanFromScreen = (_id: any) => {};
 
   useEffect(() => {
     const backAction = () => {
       if (edit) {
-        setEdit(false);
+        onEdit?.(false);
         return true;
       }
       return false;
@@ -27,14 +29,14 @@ export default function SwipeableList(props: SwipeableListProps) {
     );
 
     return () => backHandler.remove();
-  }, [edit]);
+  }, [edit, onEdit]);
 
   const renderItems = () => {
     return data.map(item => {
       return (
         <Item
           isEdit={edit}
-          onStartEdit={setEdit}
+          onStartEdit={onEdit}
           key={item.id}
           swipingCheck={(_swiping: boolean) => setSwiping(_swiping)}
           // message={item.message}

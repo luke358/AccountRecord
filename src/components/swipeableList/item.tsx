@@ -97,7 +97,11 @@ export default function Item(props: ItemProps) {
     PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: () => true,
+
       onPanResponderMove: (event, gesture) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         if (gesture.dx >= SCROLL_THRESHOLD) {
           enableScrollView(true);
           const x = gesture.dx - SCROLL_THRESHOLD;

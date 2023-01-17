@@ -18,6 +18,7 @@ import DrawerContent from './components/DrawerContent';
 const Home = () => {
   const navigate = useNavigate();
   const navigation = useNavigation<any>();
+  const [edit, setEdit] = React.useState(false);
 
   return (
     <SafeAreaView style={styles.appWrapper}>
@@ -130,7 +131,11 @@ const Home = () => {
             </View>
           </View>
           {/* 当前日期 收支明细 */}
-          <SwipeableList data={[{id: 1}, {id: 2}]} />
+          <SwipeableList
+            onEdit={setEdit}
+            edit={edit}
+            data={[{id: 1}, {id: 2}]}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
