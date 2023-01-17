@@ -95,13 +95,10 @@ export default function Item(props: ItemProps) {
   };
   const panResponder = React.useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
-
+      onMoveShouldSetPanResponderCapture: () => true,
       onPanResponderMove: (event, gesture) => {
-        event.preventDefault();
-        event.stopPropagation();
-
         if (gesture.dx >= SCROLL_THRESHOLD) {
           enableScrollView(true);
           const x = gesture.dx - SCROLL_THRESHOLD;
@@ -146,6 +143,7 @@ export default function Item(props: ItemProps) {
       },
     }),
   );
+
   const {containerStyle, leftButtonContainer, textContainer} = styles;
   return (
     <View style={containerStyle}>
@@ -165,9 +163,7 @@ export default function Item(props: ItemProps) {
         {...panResponder.current.panHandlers}
         style={[textContainer, positionRef.current.getLayout()]}>
         <TouchableRipple
-          onPress={() => {}}
           onTouchStart={() => {
-            console.log('start');
             timer.current = setTimeout(() => {
               if (!scrollStopped.current) {
                 console.log('开启选择模式');
