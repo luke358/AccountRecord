@@ -14,6 +14,7 @@ export default function Expense() {
       }}>
       {arr.map((item, index) => (
         <View
+          key={index}
           style={{
             alignItems: 'center',
             justifyContent: 'center',

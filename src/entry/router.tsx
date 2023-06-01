@@ -18,6 +18,7 @@ export const ROUTE_PATH = {
   INFO: 'info',
   CHART: 'chart',
   MINE: 'mine',
+  // 添加记账
   ADDRECORD: 'addRecord',
 } as const;
 
